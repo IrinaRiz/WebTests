@@ -3,63 +3,49 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class WebTest {
+    public WebDriver driver;
 
-    public static final String CHROMEDRIVER = "webdriver.chrome.driver";
-    public static final String DRIVERPATH = "/Chromedriver/chromedriver.exe";
-    public static final String URL = "http://www.99-bottles-of-beer.net/";
+    @BeforeMethod
+    public void startUp() throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "/Chromedriver/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get("http://www.99-bottles-of-beer.net/");
+        Thread.sleep(3000);
+    }
+
+    @AfterMethod
+    public void setDown(){
+        driver.close();
+        driver.quit();
+    }
 
     @Test
-    public void testFirst() throws InterruptedException {
-
+    public void testFirst() {
         String expectedResult = "http://www.99-bottles-of-beer.net/";
-
-        System.setProperty(CHROMEDRIVER, DRIVERPATH);
-        WebDriver driver = new ChromeDriver();
-
-        driver.get(URL);
-        Thread.sleep(3000);
 
         String actualResult = driver.getCurrentUrl();
 
         Assert.assertEquals(actualResult, expectedResult);
-
-        driver.close();
-        driver.quit();
     }
 
     @Test
-    public void testSecond() throws InterruptedException {
-
+    public void testSecond(){
         String expectedResult = "Welcome to 99 Bottles of Beer";
-
-        System.setProperty(CHROMEDRIVER, DRIVERPATH);
-        WebDriver driver = new ChromeDriver();
-
-        driver.get(URL);
-        Thread.sleep(3000);
 
         String actualResult = driver.findElement(By.cssSelector("#main h2")).getText();
 
         Assert.assertEquals(actualResult, expectedResult);
-
-        driver.close();
-        driver.quit();
     }
 
     @Test
-    public void headerSongTest() throws InterruptedException {
-
+    public void headerSongTest(){
         String expectedResult1 = "http://www.99-bottles-of-beer.net/lyrics.html";
         String expectedResult2 = "Lyrics of the song 99 Bottles of Beer";
-
-        System.setProperty(CHROMEDRIVER,DRIVERPATH);
-        WebDriver driver = new ChromeDriver();
-
-        driver.get(URL);
-        Thread.sleep(3000);
 
         WebElement element = driver.findElement(By.xpath("//a[contains(text(),'here')]"));
         element.click();
@@ -69,9 +55,6 @@ public class WebTest {
 
         Assert.assertEquals(actualResult1, expectedResult1);
         Assert.assertEquals(actualResult2, expectedResult2);
-
-        driver.close();
-        driver.quit();
     }
 }
 
