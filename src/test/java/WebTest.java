@@ -21,7 +21,6 @@ public class WebTest {
 
     @AfterMethod
     public void setDown(){
-        driver.close();
         driver.quit();
     }
 
