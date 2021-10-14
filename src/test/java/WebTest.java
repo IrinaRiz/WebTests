@@ -76,7 +76,7 @@ public class WebTest {
     public void validateHeader(){
         String expectedResult1 = "one program in 1500 variations";
         String expectedResult2 = "1500";
-        String expectedResult3 = "700";
+        String expectedFont = "700";
 
         String actualResult1 = driver.findElement(By.cssSelector("#header > h2")).getText();
         String actualResult2 = actualResult1.substring(15, 19);
@@ -85,7 +85,7 @@ public class WebTest {
 
         Assert.assertEquals(actualResult1, expectedResult1);
         Assert.assertEquals(actualResult2, expectedResult2);
-        Assert.assertEquals(actualResult3, expectedResult3);
+        Assert.assertEquals(actualResult3, expectedFont);
     }
 }
 
