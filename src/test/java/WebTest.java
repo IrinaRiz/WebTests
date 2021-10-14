@@ -1,3 +1,4 @@
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import java.util.List;
 
 public class WebTest {
     private WebDriver driver;
@@ -21,11 +23,13 @@ public class WebTest {
 
     @AfterMethod
     public void setDown(){
+        driver.close();
         driver.quit();
     }
 
     @Test
-    private void testFirst() {
+    public void testFirst() {
+
         String expectedResult = "http://www.99-bottles-of-beer.net/";
 
         String actualResult = driver.getCurrentUrl();
@@ -35,6 +39,7 @@ public class WebTest {
 
     @Test
     private void testSecond(){
+
         String expectedResult = "Welcome to 99 Bottles of Beer";
 
         String actualResult = driver.findElement(By.cssSelector("#main h2")).getText();
@@ -43,7 +48,7 @@ public class WebTest {
     }
 
     @Test
-    private void headerSongTest(){
+    public void headerSongTest(){
         String expectedResult1 = "http://www.99-bottles-of-beer.net/lyrics.html";
         String expectedResult2 = "Lyrics of the song 99 Bottles of Beer";
 
@@ -58,7 +63,7 @@ public class WebTest {
     }
 
     @Test
-    private void getHistoricHeader(){
+    public void getHistoricHeader(){
         String expectedResult1 = "http://www.99-bottles-of-beer.net/info.html";
         String expectedResult2 = "History";
 
@@ -73,7 +78,7 @@ public class WebTest {
     }
 
     @Test
-    private void validateHeader(){
+    public void validateHeader(){
         String expectedResult1 = "one program in 1500 variations";
         String expectedResult2 = "1500";
         String expectedFont = "700";
@@ -86,6 +91,14 @@ public class WebTest {
         Assert.assertEquals(actualResult1, expectedResult1);
         Assert.assertEquals(actualResult2, expectedResult2);
         Assert.assertEquals(actualResult3, expectedFont);
+    }
+
+    @Test
+    public  void checkBold() {
+        //boolean expectedResult =  "700" == "Bold";
+
+        List<WebElement> elements = driver.findElements(By.cssSelector("1500"));
+        System.out.println(elements);
     }
 }
 
