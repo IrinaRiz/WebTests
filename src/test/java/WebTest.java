@@ -76,12 +76,16 @@ public class WebTest {
     public void validateHeader(){
         String expectedResult1 = "one program in 1500 variations";
         String expectedResult2 = "1500";
+        String expectedResult3 = "700";
 
         String actualResult1 = driver.findElement(By.cssSelector("#header > h2")).getText();
         String actualResult2 = actualResult1.substring(15, 19);
+        WebElement element = driver.findElement(By.xpath("(//*[text()='1500'])[2]"));
+        String actualResult3 = element.getCssValue("font-weight");
 
         Assert.assertEquals(actualResult1, expectedResult1);
         Assert.assertEquals(actualResult2, expectedResult2);
+        Assert.assertEquals(actualResult3, expectedResult3);
     }
 }
 
