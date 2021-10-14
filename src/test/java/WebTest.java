@@ -25,7 +25,7 @@ public class WebTest {
     }
 
     @Test
-    public void testFirst() {
+    private void testFirst() {
         String expectedResult = "http://www.99-bottles-of-beer.net/";
 
         String actualResult = driver.getCurrentUrl();
@@ -34,7 +34,7 @@ public class WebTest {
     }
 
     @Test
-    public void testSecond(){
+    private void testSecond(){
         String expectedResult = "Welcome to 99 Bottles of Beer";
 
         String actualResult = driver.findElement(By.cssSelector("#main h2")).getText();
@@ -43,7 +43,7 @@ public class WebTest {
     }
 
     @Test
-    public void headerSongTest(){
+    private void headerSongTest(){
         String expectedResult1 = "http://www.99-bottles-of-beer.net/lyrics.html";
         String expectedResult2 = "Lyrics of the song 99 Bottles of Beer";
 
@@ -58,7 +58,7 @@ public class WebTest {
     }
 
     @Test
-    public void getHistoricHeader(){
+    private void getHistoricHeader(){
         String expectedResult1 = "http://www.99-bottles-of-beer.net/info.html";
         String expectedResult2 = "History";
 
@@ -73,7 +73,7 @@ public class WebTest {
     }
 
     @Test
-    public void validateHeader(){
+    private void validateHeader(){
         String expectedResult1 = "one program in 1500 variations";
         String expectedResult2 = "1500";
         String expectedFont = "700";
