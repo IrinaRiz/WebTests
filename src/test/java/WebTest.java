@@ -1,4 +1,3 @@
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,17 +7,21 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class WebTest {
     private WebDriver driver;
 
     @BeforeMethod
-    public void startUp() throws InterruptedException {
+    public void startUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.get("http://www.99-bottles-of-beer.net/");
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
     }
 
     @AfterMethod
@@ -28,7 +31,7 @@ public class WebTest {
     }
 
     @Test
-    public void testFirst() {
+    private void testFirst() {
 
         String expectedResult = "http://www.99-bottles-of-beer.net/";
 
@@ -48,7 +51,7 @@ public class WebTest {
     }
 
     @Test
-    public void headerSongTest(){
+    private void headerSongTest(){
         String expectedResult1 = "http://www.99-bottles-of-beer.net/lyrics.html";
         String expectedResult2 = "Lyrics of the song 99 Bottles of Beer";
 
@@ -63,7 +66,7 @@ public class WebTest {
     }
 
     @Test
-    public void getHistoricHeader(){
+    private void getHistoricHeader(){
         String expectedResult1 = "http://www.99-bottles-of-beer.net/info.html";
         String expectedResult2 = "History";
 
@@ -78,7 +81,7 @@ public class WebTest {
     }
 
     @Test
-    public void validateHeader(){
+    private void validateHeader(){
         String expectedResult1 = "one program in 1500 variations";
         String expectedResult2 = "1500";
         String expectedFont = "700";
@@ -94,11 +97,13 @@ public class WebTest {
     }
 
     @Test
-    public  void checkBold() {
-        //boolean expectedResult =  "700" == "Bold";
+    private  void checkBold() {
+        String font = "700";
 
-        List<WebElement> elements = driver.findElements(By.cssSelector("1500"));
-        System.out.println(elements);
+        List<WebElement> elements = driver.findElements(By.xpath("//*[text()='1500']"));
+        for(int i = 0; i < elements.size(); i++){
+            Assert.assertTrue(elements.get(i).getCssValue("font-weight").contains(font));
+        }
     }
 }
 
