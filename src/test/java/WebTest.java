@@ -106,7 +106,7 @@ public class WebTest {
     private  void checkBold() {
         driver.get(URL);
 
-        String font = "700";
+        final String font = "700";
 
         List<WebElement> elements = driver.findElements(By.xpath("//*[text()='1500']"));
         for(int i = 0; i < elements.size(); i++){
