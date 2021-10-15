@@ -7,19 +7,17 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class WebTest {
+    private static final String URL = "http://www.99-bottles-of-beer.net/";
     private WebDriver driver;
 
     @BeforeMethod
     public void startUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        driver.get("http://www.99-bottles-of-beer.net/");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
@@ -32,6 +30,7 @@ public class WebTest {
 
     @Test
     private void testFirst() {
+        driver.get(URL);
 
         String expectedResult = "http://www.99-bottles-of-beer.net/";
 
@@ -42,6 +41,7 @@ public class WebTest {
 
     @Test
     private void testSecond(){
+        driver.get(URL);
 
         String expectedResult = "Welcome to 99 Bottles of Beer";
 
@@ -52,6 +52,8 @@ public class WebTest {
 
     @Test
     private void headerSongTest(){
+        driver.get(URL);
+
         String expectedResult1 = "http://www.99-bottles-of-beer.net/lyrics.html";
         String expectedResult2 = "Lyrics of the song 99 Bottles of Beer";
 
@@ -67,6 +69,8 @@ public class WebTest {
 
     @Test
     private void getHistoricHeader(){
+        driver.get(URL);
+
         String expectedResult1 = "http://www.99-bottles-of-beer.net/info.html";
         String expectedResult2 = "History";
 
@@ -82,6 +86,8 @@ public class WebTest {
 
     @Test
     private void validateHeader(){
+        driver.get(URL);
+
         String expectedResult1 = "one program in 1500 variations";
         String expectedResult2 = "1500";
         String expectedFont = "700";
@@ -98,6 +104,8 @@ public class WebTest {
 
     @Test
     private  void checkBold() {
+        driver.get(URL);
+
         String font = "700";
 
         List<WebElement> elements = driver.findElements(By.xpath("//*[text()='1500']"));
